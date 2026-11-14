@@ -1,15 +1,16 @@
 {
-  "checkedAt": "2026-11-14T08:30:43.720Z",
+  "checkedAt": "2026-11-14T09:42:31.365Z",
   "status": "passed",
   "checks": {
     "files": 10,
-    "rows": 501,
-    "intervals": 451,
-    "screeningRates": 491
+    "rows": 482,
+    "intervals": 437,
+    "screeningRates": 474,
+    "scoreMoments": 482
   },
   "overviewTotals": {
-    "tested": 334915,
-    "validated": 109433
+    "tested": 216773,
+    "validated": 94224
   },
   "tables": [
     {
@@ -17,108 +18,106 @@
       "dimension": "country",
       "view": "validated",
       "rows": 192,
-      "includedN": 109302,
-      "overviewN": 109433,
-      "differenceFromOverview": 131,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 94092,
+      "overviewN": 94224,
+      "differenceFromOverview": 132,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/country-all.csv",
       "dimension": "country",
       "view": "all",
-      "rows": 233,
-      "includedN": 334266,
-      "overviewN": 334915,
-      "differenceFromOverview": 649,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "rows": 216,
+      "includedN": 216556,
+      "overviewN": 216773,
+      "differenceFromOverview": 217,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/age-validated.csv",
       "dimension": "age",
       "view": "validated",
       "rows": 4,
-      "includedN": 109433,
-      "overviewN": 109433,
+      "includedN": 94224,
+      "overviewN": 94224,
       "differenceFromOverview": 0,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/age-all.csv",
       "dimension": "age",
       "view": "all",
-      "rows": 6,
-      "includedN": 334915,
-      "overviewN": 334915,
+      "rows": 4,
+      "includedN": 216773,
+      "overviewN": 216773,
       "differenceFromOverview": 0,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/gender-validated.csv",
       "dimension": "gender",
       "view": "validated",
       "rows": 2,
-      "includedN": 82024,
-      "overviewN": 109433,
-      "differenceFromOverview": 27409,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 93763,
+      "overviewN": 94224,
+      "differenceFromOverview": 461,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/gender-all.csv",
       "dimension": "gender",
       "view": "all",
       "rows": 2,
-      "includedN": 261736,
-      "overviewN": 334915,
-      "differenceFromOverview": 73179,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 215647,
+      "overviewN": 216773,
+      "differenceFromOverview": 1126,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/education-level-validated.csv",
       "dimension": "education-level",
       "view": "validated",
       "rows": 6,
-      "includedN": 82053,
-      "overviewN": 109433,
-      "differenceFromOverview": 27380,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 93604,
+      "overviewN": 94224,
+      "differenceFromOverview": 620,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/education-level-all.csv",
       "dimension": "education-level",
       "view": "all",
       "rows": 6,
-      "includedN": 261825,
-      "overviewN": 334915,
-      "differenceFromOverview": 73090,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 215251,
+      "overviewN": 216773,
+      "differenceFromOverview": 1522,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/study-area-validated.csv",
       "dimension": "study-area",
       "view": "validated",
       "rows": 25,
-      "includedN": 109423,
-      "overviewN": 109433,
-      "differenceFromOverview": 10,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 92737,
+      "overviewN": 94224,
+      "differenceFromOverview": 1487,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     },
     {
       "file": "data/study-area-all.csv",
       "dimension": "study-area",
       "view": "all",
       "rows": 25,
-      "includedN": 334885,
-      "overviewN": 334915,
-      "differenceFromOverview": 30,
-      "note": "Dimension coverage and separate cached requests can differ; overview comparison is diagnostic, not proof of a defect."
+      "includedN": 213317,
+      "overviewN": 216773,
+      "differenceFromOverview": 3456,
+      "note": "Dimension-specific missing or unsupported categories are excluded. All tables share the same transaction."
     }
   ],
   "errors": [],
   "notes": [
-    "data/age-all.csv: nonstandard age label \"\" has n=3; retained in original CSV, excluded from four-band charts.",
-    "data/age-all.csv: nonstandard age label \"Test\" has n=2; retained in original CSV, excluded from four-band charts.",
     "Age CSVs have no CI fields. Age charts show exported interquartile ranges, not confidence intervals.",
-    "Intervals reproduce the snapshot's IQR-based implementation. This does not establish valid confidence coverage for the nonlinear group statistic.",
+    "Means and sample SDs reproduce from aggregate score moments. Intervals use the exported sample SD; they omit selection bias and do not establish representative population coverage.",
     "Country/education/study-area use age-normalized percentile columns; age/default-gender use global percentile columns. They are not interchangeable estimands."
   ],
   "reviewScope": "Technical checks against public aggregates and documented code. Not an independent human review or psychometric validation.",

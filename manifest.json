@@ -1,30 +1,48 @@
 {
-  "version": 1,
+  "version": 2,
   "publisher": "UniversalIQTest",
-  "startedAt": "2026-10-10T11:09:40.746Z",
-  "completedAt": "2026-10-10T11:09:43.037Z",
-  "scope": "Public all-time aggregate CSV exports, quality-screened and all-test views. Separate requests; not an atomic database snapshot.",
+  "startedAt": "2026-11-14T09:40:28.555Z",
+  "completedAt": "2026-11-14T09:40:32.986Z",
+  "capturedAt": "2026-11-14T09:40:28.956Z",
+  "title": "Online matrix-reasoning test performance: aggregate snapshot, 14 November 2026",
+  "scope": "All-time aggregates in the production first-exposure reference cohort, captured in one read-only repeatable-read transaction.",
+  "methodology": {
+    "identifier": "individual-score-sd-v2",
+    "introduced": "2026-11-10",
+    "mean": "Arithmetic mean of individually transformed midpoint percentiles, rounded to 0.1.",
+    "interval": "Rounded mean +/- 1.96 * rounded sample SD / sqrt(n).",
+    "exclusions": "Recognised repeats, uncertain identity matches, unverifiable responses and test data are excluded from the reference cohort.",
+    "sourceCommit": "d0fe068e9b5ef2ded57426707ff647b679965740"
+  },
   "rights": {
     "status": "Licensed for reuse",
     "identifier": "CC-BY-4.0",
     "url": "https://creativecommons.org/licenses/by/4.0/",
     "holder": "UniversalIQTest",
-    "appliesTo": "The CSVs, accompanying figures, release documentation and standalone reproduction scripts distributed in this dataset release.",
+    "appliesTo": "The aggregate CSVs, figures, documentation, aggregate score moments and standalone reproduction scripts in this release.",
     "grantedOn": "2026-11-14"
   },
-  "independentReview": "pending",
+  "independentReview": "not performed",
+  "publication": {
+    "version": "2026-11-14",
+    "date": "2026-11-14",
+    "packageRevision": 1,
+    "technicalMethodologyReview": "methodology-review.md"
+  },
+  "evidence": {
+    "file": "score-moments.json",
+    "bytes": 84880,
+    "sha256": "6ecec738250f920604e73ac9d831aba081829850c0087abb73448d6373b2902e"
+  },
   "files": [
     {
       "file": "data/country-validated.csv",
       "dimension": "country",
       "view": "validated",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-country.csv",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-country.csv",
-      "retrievedAt": "2026-10-10T11:09:40.746Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:41 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 22636,
-      "sha256": "b6048e6f4bf08e6b26d51c451ca0574eed05f7f98f0739a8fd0c06c45e72f666",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 23534,
+      "sha256": "37d5d2b20e10ca21df6d261e4f93ef97bbfb3ce90b3c233efa26792c22771ea4",
       "rows": 192,
       "columns": [
         "countryCode",
@@ -40,7 +58,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -48,13 +67,10 @@
       "dimension": "country",
       "view": "all",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-country.csv?view=all",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-country.csv?view=all",
-      "retrievedAt": "2026-10-10T11:09:41.030Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:41 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 27619,
-      "sha256": "aefed1f628a13d1951491233c72bb25275e5e091c000de3e9a665e4e2457cf0a",
-      "rows": 233,
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 26632,
+      "sha256": "81ced14aa6687cebaffa1cac5a9c49073ebb2a3a4445b3fdfad5fb94df64d230",
+      "rows": 216,
       "columns": [
         "countryCode",
         "validatedN",
@@ -69,7 +85,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -77,12 +94,9 @@
       "dimension": "age",
       "view": "validated",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-age.csv",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-age.csv",
-      "retrievedAt": "2026-10-10T11:09:41.130Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:41 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 453,
-      "sha256": "07f1069b836789162ba2bb8d64b7a986744496f60d9c31f08a5641b71208f12c",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 474,
+      "sha256": "afd26a134facd3903e425120291dd0395147c893206373efcba68e0b433e1bf5",
       "rows": 4,
       "columns": [
         "ageCategory",
@@ -95,7 +109,8 @@
         "p75",
         "p90",
         "meanTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -103,13 +118,10 @@
       "dimension": "age",
       "view": "all",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-age.csv?view=all",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-age.csv?view=all",
-      "retrievedAt": "2026-10-10T11:09:41.228Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:42 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 597,
-      "sha256": "38ca4344c111ffe8fe225857d9595d01875a1420f398aeb0b306ae3a22f1a42b",
-      "rows": 6,
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 482,
+      "sha256": "7195a636fc4d1ba53f2bf9ee74d87f9c6c8f8f086b24408ed4e121a406ba21b4",
+      "rows": 4,
       "columns": [
         "ageCategory",
         "ageRange",
@@ -121,7 +133,8 @@
         "p75",
         "p90",
         "meanTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -129,12 +142,9 @@
       "dimension": "gender",
       "view": "validated",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-gender.csv",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-gender.csv",
-      "retrievedAt": "2026-10-10T11:09:42.292Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:42 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 369,
-      "sha256": "d0237b3cff00f4e78ee42841d1af7eb6d345b526ad308df0ca25fcb30fcddffb",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 397,
+      "sha256": "7e85dd0f0fdc2df477569f94f84f9b929992c601960589632754d69919962c68",
       "rows": 2,
       "columns": [
         "gender",
@@ -150,7 +160,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -158,12 +169,9 @@
       "dimension": "gender",
       "view": "all",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-gender.csv?view=all",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-gender.csv?view=all",
-      "retrievedAt": "2026-10-10T11:09:42.363Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:42 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 373,
-      "sha256": "05dbce5ad99fbeb42d42d91359ba9b54960c000754e144a31a723dea663bf683",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 394,
+      "sha256": "4416ee7b6a6a80fd187caedd548588494c62204fd65d388e67e349c7b5ab86fa",
       "rows": 2,
       "columns": [
         "gender",
@@ -179,7 +187,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -187,12 +196,9 @@
       "dimension": "education-level",
       "view": "validated",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-education-level.csv",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-education-level.csv",
-      "retrievedAt": "2026-10-10T11:09:42.511Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:42 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 971,
-      "sha256": "6480beedf4e482d87959fe4701a80c97b3a4d2a3a0b42ed878b4b8cd7c8e02f7",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 1012,
+      "sha256": "32e5110c9d9a453725b0fe250f553932a7c2870d1afbbbb2403ebca092c61584",
       "rows": 6,
       "columns": [
         "educationLevel",
@@ -208,7 +214,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -216,12 +223,9 @@
       "dimension": "education-level",
       "view": "all",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-education-level.csv?view=all",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-education-level.csv?view=all",
-      "retrievedAt": "2026-10-10T11:09:42.623Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:42 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 964,
-      "sha256": "e14525507fc2101bec1457e85a183a8ac02b131a396e0a116c222187285355f1",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 1009,
+      "sha256": "3a73f2bff398687c9e2d201fe1da3ff595c9d5c1f64a968c888a1c9040685a1b",
       "rows": 6,
       "columns": [
         "educationLevel",
@@ -237,7 +241,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -245,12 +250,9 @@
       "dimension": "study-area",
       "view": "validated",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-study-area.csv",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-study-area.csv",
-      "retrievedAt": "2026-10-10T11:09:42.796Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:43 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 3573,
-      "sha256": "9ecab6679df94a99132779f405b7a82d12b140b7fe153f654a15a61fb39bd797",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 3715,
+      "sha256": "3d73a80f4af7a1cfd26e4427941a9773f88fe16a3796e7a264bfc8a90b92b99a",
       "rows": 25,
       "columns": [
         "studyArea",
@@ -266,7 +268,8 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     },
     {
@@ -274,12 +277,9 @@
       "dimension": "study-area",
       "view": "all",
       "sourceUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-study-area.csv?view=all",
-      "resolvedUrl": "https://www.universaliqtest.com/api/statistics/average-iq-by-study-area.csv?view=all",
-      "retrievedAt": "2026-10-10T11:09:42.881Z",
-      "httpDate": "Sat, 10 Oct 2026 11:09:43 GMT",
-      "contentType": "text/csv; charset=utf-8",
-      "bytes": 3590,
-      "sha256": "ecea60941f0d41676e99576104d4140483ddaceedd37ced652c7bdc92ee59fe6",
+      "source": "Coherent production aggregate snapshot using the live calculation; stddevIQ added for reproduction.",
+      "bytes": 3701,
+      "sha256": "b8bed0818fdc5e4396f501c181b9fb6fc68fe6c1595a38e6f9bf1df01705c554",
       "rows": 25,
       "columns": [
         "studyArea",
@@ -295,14 +295,9 @@
         "p75",
         "p90",
         "avgTimeMs",
-        "updatedAt"
+        "updatedAt",
+        "stddevIQ"
       ]
     }
-  ],
-  "publication": {
-    "version": "2026-10-10",
-    "date": "2026-11-14",
-    "packageRevision": 2,
-    "technicalMethodologyReview": "methodology-review.md"
-  }
+  ]
 }

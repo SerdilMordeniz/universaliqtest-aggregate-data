@@ -1,63 +1,61 @@
-# UniversalIQTest aggregate snapshot — 10 October 2026
+# UniversalIQTest aggregate snapshot — 14 November 2026
 
-This is a dated capture of the site's first-party public aggregate exports. At capture, the public overview reported **334,915 recorded tests**, including **109,433 quality-screened results**. Quality screening checks test-taking behaviour; it does not establish psychometric validity.
+Version **2026-11-14**, captured **2026-11-14 09:40:28.956 UTC**. Publisher and rights holder: **UniversalIQTest**. Licensed under **CC BY 4.0**.
 
-Snapshot version **2026-10-10**. Publication date **14 November 2026**. Publisher and rights holder **UniversalIQTest**. Licensed under **CC BY 4.0**.
+The snapshot contains **216,773 tests included in the current reference cohort**, of which **94,224 passed the current quality checks**. These totals matched the live statistics at capture. The latest included submission was recorded at **2026-11-14 01:57:24.926 UTC**. Later live totals can change as the reference data refreshes.
 
-Package revision **2** includes the worked teaching example omitted from the initial archive. The ten captured CSVs are unchanged.
+The ten CSVs contain **482 aggregate group rows** across country, age band, gender, education and study area, in quality-screened and all-included views. They were generated from one read-only, repeatable-read production snapshot using the same aggregate calculations as the website. The public CSV fields were compared with all ten live exports: all 482 rows matched. This release adds `stddevIQ` and aggregate score moments for reproducible arithmetic.
 
-The collection includes country, age band, gender, education and study area, each in quality-screened and all-test views. The files are captured from separate HTTP requests and cached endpoints, so this is not an atomic database extract or a fixed annual cohort. Capture times, exact source URLs, SHA-256 checksums, schemas and row counts are in [manifest.json](manifest.json).
+## Counting basis
 
-## What has been checked
+The reference cohort follows the first-recorded-exposure policy introduced on **10 November 2026**. Recognised repeat attempts, uncertain identity matches, unverifiable responses and test data are excluded before the current cohort is counted. The screened view then selects the included records passing the quality checks. These counts do not certify unique individuals or psychometric validity.
 
-[verification.json](verification.json) records 10 files, 501 aggregate rows, 491 screening-rate checks and 451 reproducible interval calculations. All ten original CSV checksums match the capture manifest. The completed [technical methodology review](methodology-review.md) explains the historical calculations, coverage differences and interval limitations. An independent external psychometric assessment has not been performed.
+The [10 October snapshot](https://doi.org/10.5281/zenodo.24216588) used the earlier counting and scoring rules and reported 334,915 recorded tests and 109,433 quality-screened results. Its larger historical totals are not a growth baseline for the current cohort. See [CHANGELOG.md](CHANGELOG.md).
 
-The historical `meanIQ` field is an inverse-normal transform of a group's mean stored percentile. The frozen snapshot retains the calculation and screening rules used on 10 October 2026. The live site's estimator and quality rules changed in November 2026.
+## Dimension coverage
 
-The age files contain 109,433 screened and 334,915 all-test records. The latter includes five records outside the four named age bands: three with an empty label and two labelled `Test`. Country exports retain legacy category labels including `USA` and `USD`. The source CSVs preserve these original groups. Four-band age charts use only the screened groups.
+| Dimension | All included | Passed quality checks |
+| --- | ---: | ---: |
+| Entire reference cohort | 216,773 | 94,224 |
+| Country | 216,556 | 94,092 |
+| Age | 216,773 | 94,224 |
+| Gender | 215,647 | 93,763 |
+| Education level | 215,251 | 93,604 |
+| Study area | 213,317 | 92,737 |
 
-Dimension coverage differs. Country tables include 109,302 screened / 334,266 all-test records; gender 82,024 / 261,736; education 82,053 / 261,825; study area 109,423 / 334,885. These are observed table totals, not interchangeable denominators. Missing/unsupported categories and separately cached requests can affect coverage; public aggregates alone cannot identify every cause.
+Missing or unsupported categories explain dimension-specific coverage. Supported gender rows are male/female. Education and study-area categories use the live normalization and exclusions. Country tables retain source labels, including legacy labels that should not automatically be treated as valid ISO codes. These totals are not interchangeable denominators.
 
-## Files and charts
+## Files and verification
 
-- `data/`: ten original CSVs, unchanged.
-- [data-dictionary.md](data-dictionary.md): field definitions, scoring bases, units and limitations.
-- `charts/`: seven figures, each as PNG, SVG and PDF, with separate alternative text. Age figures are available in English, French and Russian; country figures in English, Italian and Polish; screening coverage in English.
-- [teaching-example.md](teaching-example.md): a worked aggregate-only exercise about spread, denominators and sample selection.
-- [methodology-review.md](methodology-review.md): the completed technical review, findings and scope of the available evidence.
-- `scripts/`: standalone capture, verification and chart-rendering programs in the public repository and downloadable release.
-
-Country figures illustrate nine cohorts, ordered by country code, with screened n ≥ 200. The selection and display threshold are documented charting choices. The release supports descriptive analysis and teaching about a self-selected online cohort. Population IQ estimation and clinical assessment are outside its supported scope.
+- [manifest.json](manifest.json): capture scope, policy description, source commit, schemas and CSV SHA-256 hashes.
+- [overview-evidence.json](overview-evidence.json): coherent cohort counts, capture time and latest included submission.
+- [data-dictionary.md](data-dictionary.md): definitions and interpretation.
+- [methodology-review.md](methodology-review.md): completed technical review and evidence limits.
+- [score-moments.json](score-moments.json): group counts, score sums and squared-score sums; no participant identifiers or individual rows.
+- [verification.json](verification.json): checks for 482 rows and score moments, 474 screening rates and 437 approximate intervals.
+- [live-comparison.json](live-comparison.json): comparison with all ten public CSV exports at capture.
+- `charts/`: seven figures, each in PNG/SVG/PDF with alternative text.
+- [teaching-example.md](teaching-example.md): worked exercises using this release.
 
 ## Reproduction
 
-From the root of the downloaded release or public dataset repository, run:
+From the unpacked release root:
 
 ```text
 node scripts/verify-dataset-release.mjs .
 python scripts/render-dataset-charts.py .
 ```
 
-Verification requires Node.js 22 or later and its built-in modules. Chart rendering requires Python 3 and Matplotlib. Runtime versions are recorded in `charts/runtime.json`.
-
-Capture a new version into a **new directory**:
-
-```text
-node scripts/capture-dataset-release.mjs NEW_OUTPUT_DIRECTORY
-```
-
-A new capture contains different dates and potentially different values. Reproduction of this release uses its frozen CSVs, not a fresh download. Group scores cannot be independently recomputed from aggregates alone because the underlying percentile records are not exported.
+Verification uses Node.js 22 or later and built-in modules. Rendering uses Python 3 and Matplotlib; versions are recorded in `charts/runtime.json`. The capture helper included with the parser can retrieve independently cached public exports, but does not recreate this coherent production snapshot or its score-moment evidence. A future production capture needs its own recorded cutoff, policy and review.
 
 ## Licence and citation
 
-Copyright © 2026 UniversalIQTest. The CSV files, accompanying figures, release documentation and standalone reproduction scripts distributed in this dataset release are licensed under the [Creative Commons Attribution 4.0 International licence](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](LICENSE) for the full terms.
+Copyright © 2026 UniversalIQTest. The aggregate CSVs, figures, release documentation, aggregate score moments and standalone reproduction scripts distributed here are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](LICENSE). Credit UniversalIQTest, link to the licence and identify changes.
 
-Reuse and adaptation, including commercial reuse, are permitted with appropriate attribution, a licence link and an indication of changes. Suggested attribution follows.
+> UniversalIQTest (2026). *Online matrix-reasoning test performance: aggregate snapshot, 14 November 2026* (version 2026-11-14). https://doi.org/10.5281/zenodo.24217581. CC BY 4.0.
 
-> UniversalIQTest (2026). *Online matrix-reasoning test performance — aggregate snapshot, 10 October 2026* (version 2026-10-10). https://github.com/SerdilMordeniz/universaliqtest-aggregate-data. CC BY 4.0. Changes: [describe any changes].
+An independent external psychometric assessment has not been performed. The results describe a self-selected online cohort. Population inference, clinical assessment, test reliability and causal interpretations require additional evidence.
 
-The public repository includes machine-readable citation metadata in `CITATION.cff`.
+Live sources: https://www.universaliqtest.com/statistics and https://www.universaliqtest.com/methodology-and-limits.
 
-Public methods: https://www.universaliqtest.com/methodology-and-limits.
-
-Archived version https://doi.org/10.5281/zenodo.24216588
+Archived version https://doi.org/10.5281/zenodo.24217581

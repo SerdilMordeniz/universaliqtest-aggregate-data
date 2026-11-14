@@ -1,20 +1,12 @@
 {
-  "sourceUrl": "https://www.universaliqtest.com/dataset-overview-and-sources",
-  "resolvedUrl": "https://www.universaliqtest.com/dataset-overview-and-sources",
-  "retrievedAt": "2026-10-10T11:09:43.036Z",
+  "sourceUrl": "https://www.universaliqtest.com/statistics",
+  "capturedAt": "2026-11-14T09:40:28.956Z",
+  "transactionReadOnly": true,
+  "isolation": "RepeatableRead",
   "counts": {
-    "tested": "334,915",
-    "validated": "109,433"
+    "tested": 216773,
+    "validated": 94224
   },
-  "publicCountMentions": [
-    "334,915",
-    "109,433"
-  ],
-  "pagePropKeys": [
-    "pageLocale",
-    "totals",
-    "articleGuides",
-    "_nextI18Next"
-  ],
-  "countsRetrievedAt": "2026-10-10T11:10:34.698Z"
+  "latestIncludedSubmission": "2026-11-14T01:57:24.926Z",
+  "source": "Same production reference cohort and count query as the live statistics; captured in the same transaction as all ten tables."
 }

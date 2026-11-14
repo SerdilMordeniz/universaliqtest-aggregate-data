@@ -1,29 +1,26 @@
 # Data dictionary
 
-Every row is a group aggregate, not a participant. Empty cells mean unavailable; they do not mean zero. The first column identifies the group. CSVs use UTF-8 and decimal points.
+Each row is a group aggregate. CSVs use UTF-8, decimal points and LF line endings. An empty numeric cell means unavailable.
 
 | Field | Definition |
-|---|---|
-| countryCode | Country label/code in the source table; do not assume every all-test value is a valid ISO code without checking. |
-| ageCategory; ageRange | Named band and displayed range: Youth 12–18, Young Adult 19–35, Adult 36–65, Senior 66–100. All-test exports also retain nonstandard labels. |
-| gender | Supported self-reported categories in the published table: male/female. Other/missing values are not represented. |
-| educationLevel; studyArea | Source categories, with normalization defined in `lib/educationStats.ts` and `lib/studyAreaStats.ts`. Availability differs from total dataset coverage. |
-| n | Age CSV sample size for the selected view. |
-| validatedN | Number passing automated quality rules in the group, in both country/gender/education/study views. This name is not a scientific validation claim. |
-| allN | All recorded group tests, including those failing the quality rules. This includes recorded attempts/records, not verified unique people. |
-| validationRate | `100 × validatedN / allN`, rounded to one decimal place. Describes quality screening coverage. |
-| meanIQ | **Inverse-normal transform of the mean stored percentile**, using scale location 100 and SD 15, rounded to 0.1. It is not the arithmetic mean of individual displayed IQ scores. |
-| p10; p25; p50/median; p75; p90 | Group percentiles transformed to the same score scale. `p50` is used in age CSVs; `median` in the other dimensions. |
-| ciLower; ciUpper | Exported approximate limits: `meanIQ ± 1.96 × s / sqrt(n)`, with `s = round((p75−p25)/1.349, 1)`. For other dimensions, n is validatedN in screened view and allN in all view. Limits are unavailable for n ≤ 1 or nonpositive spread. Age CSVs do not contain CI fields. |
-| avgTimeMs; meanTimeMs | Mean recorded total time in milliseconds; age uses `meanTimeMs`. Do not infer focused time or comparable clinical administration from this value. |
-| updatedAt | Latest included record timestamp in that group; not the capture time or a fixed annual observation window. |
+| --- | --- |
+| countryCode | Source country label. Legacy labels are retained; validate codes before mapping to an ISO geography. |
+| ageCategory; ageRange | Youth 12–18, Young Adult 19–35, Adult 36–65, Senior 66–100. |
+| gender | Supported published self-reported categories: male/female. |
+| educationLevel; studyArea | Normalized categories used by the live statistics; missing or unsupported categories are omitted. |
+| n | Age-group count in the selected view. |
+| validatedN | Group records in the current reference cohort passing the quality checks. The field name is historical and does not imply psychometric validation. |
+| allN | Group records included in the current reference cohort before the quality-pass filter. It excludes recognised repeats, uncertain identity matches, unverifiable responses and test data. It is not all submitted attempts. |
+| validationRate | `100 * validatedN / allN`, rounded to one decimal. |
+| meanIQ | Arithmetic mean of individual transformed midpoint percentiles, rounded to one decimal. |
+| stddevIQ | Sample standard deviation of those individual transformed scores, rounded to one decimal; unavailable for n <= 1. Added to support reproduction. |
+| p10; p25; p50/median; p75; p90 | The corresponding group percentile in percentile-rank space, linearly interpolated and transformed to the score scale. Age uses p50; other dimensions use median. |
+| ciLower; ciUpper | `meanIQ +/- 1.96 * stddevIQ / sqrt(n)` using the published rounded mean and SD. Unavailable for n <= 1 or missing SD. Age files omit these fields. |
+| avgTimeMs; meanTimeMs | Average recorded total time in milliseconds; age uses meanTimeMs. |
+| updatedAt | Latest included submission in the group, rather than the capture timestamp. |
 
-Check each file's exact headers in `manifest.json`; grouping-field names can differ. Country/education/study-area use age-normalized stored percentiles. Age and the default gender export use global stored percentiles. These measure different things and should not be pooled into one common ranking.
+Individual score transformation is `100 + 15 * Phi^-1(p)` after clamping p to 0.0001–0.9999. Equal raw scores share midpoint percentiles; response speed does not break score ties. Country, education and study-area summaries use age-normalized percentiles. Age and default gender summaries use global percentiles. The all-included and quality-screened views use their respective reference distributions.
 
-The inverse-normal transform is clamped to percentiles 0.0001–0.9999. Public aggregates do not expose each stored percentile, so the group transformation itself cannot be reconstructed from CSV quartiles. The QA script checks published intervals and internal arithmetic, not item scoring or individual records.
+`score-moments.json` stores group n, the sum of unrounded transformed scores and the sum of their squares. Reproduce the rounded mean as `round(scoreSum/n, 1)` and the rounded sample SD as `round(sqrt((scoreSquaredSum-scoreSum^2/n)/(n-1)), 1)`. This is aggregate evidence; it does not contain participant rows or verify the original answers.
 
-The approximate intervals rely on an IQR-derived spread and a square-root-n calculation around a nonlinear statistic. The release does not establish 95% coverage for that estimand. They omit selection bias, normalization uncertainty and test measurement error. Narrow intervals do not make a voluntary online cohort representative of a country's population.
-
-Definitions checked against `lib/statisticsCsv.ts`, the five CSV route files, `lib/countryStats.ts`, `lib/ageStats.ts`, `lib/genderStats.ts`, `lib/educationStats.ts`, `lib/studyAreaStats.ts`, and the public methods page on 10 October 2026.
-
-The historical definition used at capture was checked again on 14 November 2026. The live site revised its mean-score estimator and quality rules in November 2026. See methodology-review.md for the frozen snapshot interpretation.
+Counts differ by dimension because missing or unsupported categories are excluded. Refer to the coverage table in README.md and exact schemas in manifest.json. A larger voluntary sample does not remove selection bias. These approximate intervals omit normalization uncertainty, test measurement error and selection bias, and do not establish representative population coverage.

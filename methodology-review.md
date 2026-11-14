@@ -1,45 +1,33 @@
-# Technical methodology review
+# Technical methodology review — 14 November 2026
 
-Reviewed on 14 November 2026. This review covers the frozen public aggregate snapshot captured on 10 October 2026, its historical calculation, source-file integrity, reproducible arithmetic and supporting figures.
+This review covers the current-policy aggregate snapshot captured at 2026-11-14 09:40:28.956 UTC. It checks production-source agreement, coherent denominators, file integrity, score arithmetic and figure interpretation.
 
-## Capture and integrity
+## Capture and reconciliation
 
-The ten CSVs contain 501 aggregate rows. Exact source URLs, retrieval times, response metadata, column definitions, byte lengths and SHA-256 hashes are recorded in `manifest.json`. Each file was retrieved separately from a cached public endpoint. Observation windows are all-time records available to that endpoint at capture.
+All ten aggregate tables and the headline denominator were captured in one read-only repeatable-read production transaction. The source was the same first-recorded-exposure reference used by the live statistics. Its latest included submission was 2026-11-14 01:57:24.926 UTC.
 
-The CSV bytes match all ten original capture hashes. Git attributes preserve those bytes when the public repository is checked out on Windows. Original category labels and numerical values are retained.
+The source contained **216,773 included tests and 94,224 passing current quality checks**. These agree with the live overview at capture. Country, gender, education and study-area totals are lower because their supported categories do not cover every included record. Age totals reconcile exactly. The dimension counts are listed in README.md and verification.json.
 
-## Historical group statistic
+The release contains 482 aggregate rows. A field-by-field comparison with all ten live CSV exports matched every row. The release adds the sample SD as stddevIQ and group score moments for verification. All CSV byte lengths, schemas and SHA-256 hashes are recorded in manifest.json.
 
-The implementation in use at capture calculated the arithmetic mean of a group's stored percentiles and transformed that mean through the inverse normal distribution with location 100 and standard deviation 15. The reported group statistic is `100 + 15 × Φ⁻¹(mean stored percentile)`, rounded to one decimal place. Percentiles are clamped to the range 0.0001 through 0.9999 before transformation.
+## Current policy and the historical break
 
-Country, education and study-area summaries use age-normalized percentiles. Age-band summaries and default gender summaries use global percentiles. Quantile columns transform the corresponding group percentile through the same score scale.
+The first-recorded-exposure and revised screening policy was introduced on 10 November 2026. Recognised repeats, uncertain identity matches, unverifiable responses and test data are outside the current reference cohort. The passing-quality view is a subset of that cohort. Browser and historical identity evidence cannot certify unique humans, and unrecognised prior exposure remains possible.
 
-This definition was checked against the historical implementation used at capture. A November 2026 revision changed the live site's mean-score calculation and screening rules. Interpret this frozen release using its historical definitions and capture date.
+The October snapshot reported **334,915 recorded tests and 109,433 quality-screened results under the earlier rules**. Its larger totals are historical observations from a different cohort definition. They are not a current participant count or a directly comparable growth baseline. CHANGELOG.md describes the break; the original version remains available at https://doi.org/10.5281/zenodo.24216588.
 
-The CSV aggregates contain the published score, quantiles and counts. Reconstructing the group's transformed mean from its raw inputs requires participant-level percentiles, which are outside this aggregate release.
+## Mean, dispersion and intervals
 
-## Interval arithmetic and interpretation
+Each stored midpoint percentile is clamped to 0.0001–0.9999 and transformed through the inverse normal distribution with location 100 and scale 15. The group mean is the arithmetic mean of these individual values; the spread is their sample standard deviation. Both are rounded to one decimal, as in the current website implementation.
 
-The exported approximate limits for country, gender, education and study area use `group statistic ± 1.96 × s / sqrt(n)`, where `s = round((p75 − p25) / 1.349, 1)`. The sample size is `validatedN` for the screened view and `allN` for the all-test view. Limits are unavailable for sample sizes at most one or nonpositive interquartile spread.
+Country, education and study-area summaries use age-normalized percentiles. Age and default gender summaries use global percentiles. Each view uses its own reference distribution. Group quantiles are transformed after linear interpolation in percentile space.
 
-All 451 available interval calculations reproduce to numerical tolerance. All 491 exported screening rates reproduce as `100 × validatedN / allN`, rounded to one decimal place. Age CSVs provide quantiles without interval fields. Their charts display the interquartile range.
+All **482 means and sample SDs** reproduce from the published aggregate score sums and squared sums. All **474 screening rates** reproduce from the group counts. The **437 available approximate intervals** reproduce as `meanIQ +/- 1.96 * stddevIQ / sqrt(n)`. Age charts display the interquartile range and do not present it as a confidence interval.
 
-Reproducible arithmetic establishes consistency with the historical calculation. Confidence coverage for this transformed group statistic has not been established. The calculation omits selection bias, normalization uncertainty and test measurement error.
+The technical checks establish arithmetic agreement with the documented implementation. The approximate intervals omit selection bias, normalization uncertainty and measurement error. Their population coverage has not been established.
 
-## Coverage and category findings
+## Figures and supported use
 
-The public overview at capture reported 334,915 recorded tests and 109,433 quality-screened results. The age tables reconcile to those totals. Country, gender, education and study-area tables have smaller dimension-specific totals, which are listed in the README and verification report. Each analysis should identify the denominator it uses.
+The seven figures use the frozen verified inputs and carry the capture date. Country figures show sample sizes and are ordered by country code. The selected-country display threshold is 200 passing records. Screening percentages use included reference-cohort tests as their denominator. Age figures show middle-50% ranges and mean individual scores.
 
-The all-test age export includes three records with an empty category and two with the label `Test`. Four-band age figures use the screened groups. Country exports retain legacy category labels, including `USA` and `USD`. Published CSVs preserve the source groups so later cleaning remains an explicit, reproducible analysis choice.
-
-The screening rate describes the fraction of recorded group tests passing the site's automated rules. Records can include repeat participation. Available aggregates do not establish a count of unique individuals.
-
-## Figure review
-
-The seven figures were regenerated from the verified frozen CSV inputs. Counts, score positions and plotted ranges were checked against those inputs. Age figures label their bars as interquartile ranges. Country figures show each screened sample size and explain the limitations of their approximate intervals. Country selections are ordered by code and meet the stated display threshold of 200 screened records.
-
-## Supported scope and remaining evidence
-
-The release supports descriptive analysis of a self-selected online cohort and teaching about aggregation, spread and sample selection. Population inference, clinical assessment, test reliability and causal interpretations require additional evidence.
-
-An independent external psychometric assessment has not been performed. Item discrimination, internal consistency, retest stability and comparisons with established assessments are outside the evidence supplied by these aggregate CSVs. Publication of the technical review makes its findings and scope available for further scrutiny.
+This release supports descriptive analysis and teaching about a self-selected online cohort. An independent external psychometric assessment has not been performed. Item discrimination, internal consistency, retest stability, clinical validity and representative population IQ norms are outside the evidence supplied here.
