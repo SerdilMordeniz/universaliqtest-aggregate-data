@@ -1,0 +1,20 @@
+{
+  "sourceUrl": "https://www.universaliqtest.com/dataset-overview-and-sources",
+  "resolvedUrl": "https://www.universaliqtest.com/dataset-overview-and-sources",
+  "retrievedAt": "2026-10-10T11:09:43.036Z",
+  "counts": {
+    "tested": "334,915",
+    "validated": "109,433"
+  },
+  "publicCountMentions": [
+    "334,915",
+    "109,433"
+  ],
+  "pagePropKeys": [
+    "pageLocale",
+    "totals",
+    "articleGuides",
+    "_nextI18Next"
+  ],
+  "countsRetrievedAt": "2026-10-10T11:10:34.698Z"
+}

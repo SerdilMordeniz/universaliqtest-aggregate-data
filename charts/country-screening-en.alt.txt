@@ -1,0 +1,3 @@
+The screening step changes the country samples
+
+BG: 36.1%, 722 of 1998; CZ: 39.7%, 1377 of 3468; FR: 39.3%, 3027 of 7712; IT: 33.9%, 1478 of 4362; PL: 35.8%, 2646 of 7396; PT: 4.8%, 323 of 6795; RU: 31.6%, 13505 of 42675; SK: 35.9%, 1495 of 4159; UA: 33.3%, 22246 of 66771
