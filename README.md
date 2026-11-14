@@ -4,6 +4,8 @@ This is a dated capture of the site's first-party public aggregate exports. At c
 
 Snapshot version **2026-10-10**. Publication date **14 November 2026**. Publisher and rights holder **UniversalIQTest**. Licensed under **CC BY 4.0**.
 
+Package revision **2** includes the worked teaching example omitted from the initial archive. The ten captured CSVs are unchanged.
+
 The collection includes country, age band, gender, education and study area, each in quality-screened and all-test views. The files are captured from separate HTTP requests and cached endpoints, so this is not an atomic database extract or a fixed annual cohort. Capture times, exact source URLs, SHA-256 checksums, schemas and row counts are in [manifest.json](manifest.json).
 
 ## What has been checked

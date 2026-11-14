@@ -302,6 +302,7 @@
   "publication": {
     "version": "2026-10-10",
     "date": "2026-11-14",
+    "packageRevision": 2,
     "technicalMethodologyReview": "methodology-review.md"
   }
 }
